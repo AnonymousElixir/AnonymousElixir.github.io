@@ -1,0 +1,61 @@
+<HTMl>
+    <head>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>WebHook Tools</title>
+      <h1>WebHook Tools</h1>
+      <div class="tools">
+        <h2>WebHook Deleter</h2>
+        <input type="url" name = "deleteurl" id="deleteurl">
+        <button onclick="deletewebhook()">Delete Webhook</button>
+      </div>
+      <div class="tools">
+        <h2>WebHook JSON Sender</h2>
+        <textarea id="json" placeholder="Enter JSON here"></textarea>
+        <input type="url" name = "url" id="url">
+        <button onclick="sendjson()">Send JSON</button>
+      </div>
+      <div class="tools">
+        <h2>WebHook JSON Getter</h2>
+        <input type="url" name = "url" id="geturl">
+        <button onclick="getjson()">Get JSON</button>
+        <textarea id="getjson" placeholder="JSON will appear here"></textarea>
+      </div>
+    <script>
+          function deletewebhook() {
+            console.log(document.getElementsByName('deleteurl'))
+            var deleteurl = document.getElementById("deleteurl").value;
+            $.ajax({
+              type: "DELETE",
+              url: deleteurl,
+            });
+          }
+
+          function sendjson() {
+            console.log(document.getElementsByName('url'))
+            var url = document.getElementById("url").value;
+            var json = document.getElementById("json").value;
+            $.ajax({
+              type: "POST",
+              url: url,
+              data: JSON.stringify(JSON.parse(json)),
+              contentType: "application/json",
+            });
+          }
+
+          function getjson() {
+            console.log(document.getElementsByName('url'))
+            var url = document.getElementById("geturl").value;
+            $.ajax({
+              type: "GET",
+              url: url,
+              success: function(response) {
+                document.getElementById("getjson").innerHTML = JSON.stringify(response, null, 4);
+              },
+              contentType: "application/json",
+            });
+          }
+    </script>
+</HTMl>
+

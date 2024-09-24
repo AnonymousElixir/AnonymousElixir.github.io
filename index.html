@@ -3,348 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cassidy Camp</title>
+    <title>Blue Screen of Death</title>
     <style>
-        :root {
-            --main-bg: linear-gradient(135deg, #16141f, #0c0a14);
-            --card-bg: linear-gradient(145deg, #1e1e2e, #24243c);
-            --accent: #8a2be2;
-            --text: #ffffff;
-            --shadow-light: rgba(255, 255, 255, 0.05);
-            --shadow-dark: rgba(0, 0, 0, 0.2);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Arial', sans-serif;
-            background: var(--main-bg);
-            color: var(--text);
+            background-color: #0000ff;
+            color: #ffffff;
+            font-family: "Courier New", Courier, monospace;
             line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
+            text-align: justify;
         }
 
         header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: linear-gradient(145deg, #1a1825, #161520);
-    border-radius: 15px;
-    box-shadow: 8px 8px 16px var(--shadow-dark), 
-                -8px -8px 16px var(--shadow-light);
-    margin: 2rem 0;
-}
+            background-image: url("");
+            background-repeat: repeat-x;
+            background-position: bottom center;
+            padding: 50px;
+            border-bottom: 2px solid #ffffff;
+            color: #ffffff;
+            font-weight: bold;
+            animation: gradient 10s ease infinite;
+        }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    background: linear-gradient(45deg, var(--accent), #ff00ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-}
-
-nav {
-    display: flex;
-    gap: 1rem;
-}
-
-nav a {
-    color: var(--text);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 2px 2px 5px var(--shadow-dark), 
-                -2px -2px 5px var(--shadow-light);
-}
-
-nav a:hover {
-    color: var(--accent);
-    box-shadow: inset 2px 2px 5px var(--shadow-dark), 
-                inset -2px -2px 5px var(--shadow-light);
-}
-
-        .hero {
-            text-align: center;
-            padding: 6rem 0;
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--accent), #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin: 0;
+            font-size: 4em;
+            font-weight: bold;
+            text-shadow: 0 0 10px #ffffff, 0 0 15px #ffffff;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.8;
+        nav {
+            margin: 20px 0;
+            text-align: center;
         }
 
-        .btn {
-            background: linear-gradient(45deg, var(--accent), #ff00ff);
-            color: var(--text);
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            margin: 0 0.5rem;
-            box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
-            position: relative;
-            overflow: hidden;
+        nav a {
+            margin: 0 15px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+            border-bottom: 2px solid #ffffff;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+        nav a:hover {
+            color: #ff0000;
+            border-bottom: 2px solid #ff0000;
         }
 
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s;
-        }
-
-        .btn:hover::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        .section {
-            padding: 1rem 0;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+        section {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+            background-color: #0000ff;
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ffffff;
         }
 
         h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--accent), #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #ffffff, 0 0 15px #ffffff;
         }
 
-        .glass-card {
-            background: rgba(138, 43, 226, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+        ul {
+            list-style: square;
+            padding: 0 20px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 1s ease-out forwards;
-            opacity: 0;
-        }
-
-        a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #ff00ff;
+        li {
+            margin: 10px 0;
+            font-size: 1.2em;
         }
 
         footer {
-            background: var(--card-bg);
-            padding: 2rem 0;
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #ffffff;
+            background-color: #0000ff;
+            padding: 10px;
         }
 
-        .footer-content {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+        .marquee {
+            background-color: #0000ff;
+            color: #ffffff;
+            font-size: 2em;
+            padding: 10px;
+            text-align: center;
         }
 
-        .footer-section {
-            margin: 1rem;
+        .marquee-content {
+            white-space: nowrap;
+            animation: marquee 10s linear infinite;
         }
 
-        .footer-section h3 {
-            margin-bottom: 1rem;
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
         }
 
-        .social-icons a {
-            margin: 0 0.5rem;
-            font-size: 1.5rem;
+        .highlight {
+            background-color: #ffffff;
+            color: #0000ff;
+            padding: 0 5px;
+            border-radius: 5px;
         }
 
-        .loader-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--main-bg);
+        .social {
             display: flex;
             justify-content: center;
-            align-items: center;
-            z-index: 9999;
         }
 
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--accent);
-            border-top: 5px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .social a {
+            margin: 0 10px;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .projects {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
         }
+
+        .project {
+            background-color: #0000ff;
+            padding: 20px;
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ffffff;
+            width: 300px;
+        }
+
+        .project:hover {
+            transform: scale(1.05);
+        }
+
+        .project img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .project h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .project p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .project a {
+            color: #ff0000;
+            text-decoration: none;
+        }
+        .btn-donate {
+            --clr-font-main: hsla(0 0% 20% / 100);
+            --btn-bg-1: hsla(194 100% 69% / 1);
+            --btn-bg-2: hsla(217 100% 56% / 1);
+            --btn-bg-color: hsla(360 100% 100% / 1);
+            --radii: 0.5em;
+            cursor: pointer;
+            padding: 0.9em 1.4em;
+            min-width: 120px;
+            min-height: 44px;
+            font-size: var(--size, 1rem);
+            font-weight: 500;
+            transition: 0.8s;
+            background-size: 280% auto;
+            background-image: linear-gradient(
+                325deg,
+                var(--btn-bg-2) 0%,
+                var(--btn-bg-1) 55%,
+                var(--btn-bg-2) 90%
+            );
+            border: none;
+            border-radius: var(--radii);
+            color: var(--btn-bg-color);
+            box-shadow:
+                0px 0px 20px rgba(71, 184, 255, 0.5),
+                0px 5px 5px -1px rgba(58, 125, 233, 0.25),
+                inset 4px 4px 8px rgba(175, 230, 255, 0.5),
+                inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+            }
+
+            .btn-donate:hover {
+            background-position: right top;
+            }
+
+            .btn-donate:is(:focus, :focus-visible, :active) {
+            outline: none;
+            box-shadow:
+                0 0 0 3px var(--btn-bg-color),
+                0 0 0 6px var(--btn-bg-2);
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+            .btn-donate {
+                transition: linear;
+            }
+            }
+
     </style>
 </head>
 <body>
-    <div class="loader-wrapper">
-        <div class="loader"></div>
+
+<header>
+    <h1>Cassidy Camp</h1>
+    <p class="highlight">A Windows Error Has Happened...</p>
+    <nav>
+        <a href="#about">About Me</a>
+        <a href="#interests">Interests</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="social">
+        <a href="https://github.com/AnonymousElixir" target="_blank"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/github.png" alt="github"></a>
+        <a href="https://x.com/FlipMods" target="_blank"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/twitter.png" alt="twitter"></a>
     </div>
+</header>
 
-    <div id="particles-js"></div>
-    <div class="container">
-        <header>
-            <div class="logo">Cassidy Camp</div>
-            <nav>
-                <a href="https://github.com/AnonymousElixir">GitHub</a>
-            </nav>
-        </header>
+<section id="about">
+    <h2>About Me</h2>
+    <p>I'm a developer who enjoys creating <strong>beautiful and functional web applications</strong>. I specialize in <strong>frontend technologies</strong> while also exploring <strong>backend development</strong>.</p>
+</section>
 
-        <section class="hero fade-in" id="home">
-            <h1>Cassidy Camp</h1>
-            <p class="subtitle">Devving since 2020.</p>
-            <button class="btn" onclick="location.href='https://github.com/AnonymousElixir;">GitHub</button>
-        </section>
+<section id="interests">
+    <h2>Interests</h2>
+    <ul>
+        <li>Frontend Development (HTML, CSS, JavaScript)</li>
+        <li>Backend Development (Node.js, Flask)</li>
+        <li>Creative Programming Projects</li>
+        <li>Open Source Contributions</li>
+    </ul>
+</section>
 
-        <section class="section fade-in" id="about">
-            <div class="glass-card">
-                <h2>About Me</h2>
-                <p>I am devoted to providing the #1 Tools and Utilities for free</p>
-            </div>
-        </section>
-
-        <section class="section fade-in" id="products">
-            <div class="glass-card">
-                <h2>My Projects</h2>
-                <p>Find the source code to most of my free products aswell as hundreds of other sources on <a href="https://github.com/AnonymousElixir">My GitHub</a></p>
-            </div>
-        </section>
-
-        <footer>
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <div class="social-icons">
-                        <a href="https://github.com/AnonymousElixir" target="_blank">GitHub</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>My portfolio</h3>
-                    <p>&copy; 2024 Cassidy Camp</p>
-                </div>
-            </div>
-        </footer>
+<section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+        <div class="project">
+            <img src="https://pbs.twimg.com/card_img/1836622869461164032/ICi1Sct-?format=jpg&name=small" alt="image">
+            <h3>Neonflames</h3>
+            <p>Draw your own nebula right in your browser.</p>
+            <a href="https://cassidycamp.work/neonflames/" target="_blank">View the site</a>
+        </div>
+        <div class="project">
+            <img src="https://i.ibb.co/S5h4zPD/ZLIB9lG.png" alt="WebhookDeleter">
+            <h3>Webhook Deleter</h3>
+            <p>Useful Webhook tools.</p>
+            <a href="https://github.com/AnonymousElixir/AnonymousElixir.github.io/tree/main/whtools" target="_blank">View on GitHub</a>
+        </div>
     </div>
+</section>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
+<section id="contact">
+    <h2>Connect with Me</h2>
+    <p>Check out my projects on <a href="https://github.com/AnonymousElixir" target="_blank"><button class="btn-donate">GitHub</button></a>.</p>
+    <p>Get in touch with me on <a href="https://x.com/FlipMods" target="_blank"><button class="btn-donate">Twitter</button></a>.</p>
+    <p>Email me at cassidy@cassidycamp.work</p>
+</section>
 
-            fadeElements.forEach(el => observer.observe(el));
-        });
+<footer>
+    <p>&copy; 2024 Cassidy Camp</p>
+</footer>
 
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#8a2be2" },
-                shape: { type: "circle" },
-                opacity: { value: 0.5, random: false },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: "#8a2be2", opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
-                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
-            },
-            retina_detect: true
-        });
-
-        window.addEventListener('load', function(){
-            const loader = document.querySelector('.loader-wrapper');
-            loader.className += ' hidden';
-            setTimeout(() => {
-                loader.style.display = 'none';
-            }, 1000);
-        });
-    </script>
 </body>
 </html>
