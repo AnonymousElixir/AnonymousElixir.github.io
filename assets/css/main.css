@@ -83,7 +83,8 @@ input, select, textarea {
 	}
 
 	body {
-		background: #fff;
+		background: #121212; /* Changed to dark background */
+		color: #ffffff; /* Changed to brighter text color */
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -98,7 +99,7 @@ input, select, textarea {
 		}
 
 	body, input, select, textarea {
-		color: #a2a2a2;
+		color: #ffffff; /* Changed to brighter text color */
 		font-family: "Source Sans Pro", Helvetica, sans-serif;
 		font-size: 16pt;
 		font-weight: 400;
@@ -111,13 +112,13 @@ input, select, textarea {
 		-ms-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		border-bottom: dotted 1px;
-		color: #49bf9d;
+		color: #bb86fc; /* Brighter link color */
 		text-decoration: none;
 	}
 
 		a:hover {
 			border-bottom-color: transparent;
-			color: #49bf9d !important;
+			color: #6200ee !important; /* Brighter hover color */
 			text-decoration: none;
 		}
 
@@ -132,6 +133,9 @@ input, select, textarea {
 
 	p {
 		margin: 0 0 2em 0;
+	}
+	#p2 {
+		margin: 0 0 1.0em 0;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -1765,7 +1769,7 @@ input, select, textarea {
 	}
 
 	header p {
-		color: #b2b2b2;
+		color: #ffffff; /* Changed to brighter text color */
 		position: relative;
 		margin: 0 0 1.5em 0;
 	}
@@ -1801,7 +1805,7 @@ input, select, textarea {
 	}
 
 	label {
-		color: #787878;
+		color: #ffffff; /* Changed label color to brighter */
 		display: block;
 		font-size: 0.9em;
 		font-weight: 400;
@@ -1817,10 +1821,10 @@ input, select, textarea {
 		-webkit-appearance: none;
 		-ms-appearance: none;
 		appearance: none;
-		background: #f7f7f7;
+		background: #333333; /* Changed input background */
 		border-radius: 0.35em;
 		border: solid 2px transparent;
-		color: inherit;
+		color: #ffffff; /* Changed input text color to brighter */
 		display: block;
 		outline: 0;
 		padding: 0 0.75em;
@@ -1980,10 +1984,11 @@ input, select, textarea {
 /* Box */
 
 	.box {
-		border-radius: 0.35em;
-		border: solid 2px #efefef;
+		border-radius: 0.5em; /* Added border-radius for bezel curve */
+		border: solid 2px #efefef; /* Original border */
 		margin-bottom: 2em;
 		padding: 1.5em;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1); /* Bezel effect */
 	}
 
 		.box > :last-child,
@@ -1994,8 +1999,9 @@ input, select, textarea {
 
 		.box.alt {
 			border: 0;
-			border-radius: 0;
+			border-radius: 0.5em; /* Added border-radius for bezel curve */
 			padding: 0;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1); /* Bezel effect */
 		}
 
 /* Icon */
@@ -2038,10 +2044,11 @@ input, select, textarea {
 /* Image */
 
 	.image {
-		border-radius: 0.35em;
+		border-radius: 0.5em; /* Added border-radius for bezel curve */
 		border: 0;
 		display: inline-block;
 		position: relative;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1); /* Bezel effect */
 	}
 
 		.image:before {
@@ -2444,9 +2451,9 @@ input, select, textarea {
 		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		background-color: transparent;
-		border-radius: 0.35em;
-		border: solid 3px #efefef;
-		color: #787878 !important;
+		border-radius: 0.5em; /* Added border-radius for bezel curve */
+		border: solid 3px #efefef; /* Original border */
+		color: #ffffff !important;
 		cursor: pointer;
 		display: inline-block;
 		font-weight: 400;
@@ -2458,6 +2465,7 @@ input, select, textarea {
 		text-align: center;
 		text-decoration: none;
 		white-space: nowrap;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1); /* Bezel effect */
 	}
 
 		input[type="submit"]:hover,
@@ -2591,13 +2599,13 @@ input, select, textarea {
 		-webkit-justify-content: space-between;
 		-ms-justify-content: space-between;
 		justify-content: space-between;
-		background-color: #1f1815;
+		background-color: #1f1f1f; /* Changed header background */
 		background-attachment: scroll,								scroll;
 		background-image: url("images/overlay.png"), url("../../images/bg.jpg");
 		background-position: top left,							top left;
 		background-repeat: repeat,								no-repeat;
 		background-size: auto,								150%;
-		color: rgba(255, 255, 255, 0.5);
+		color: #ffffff; /* Changed header text color to brighter */
 		height: 100%;
 		left: 0;
 		padding: 8em 4em;
@@ -2690,8 +2698,8 @@ input, select, textarea {
 
 		#main > section {
 			border-top: solid 2px #efefef;
-			margin: 4em 0 0 0;
-			padding: 4em 0 0 0;
+			margin: 1em 0 0 0;
+			padding: 1em 0 0 0;
 		}
 
 			#main > section:first-child {
@@ -3077,7 +3085,7 @@ input, select, textarea {
 
 			#footer {
 				background-attachment: scroll;
-				background-color: #1f1815;
+				background-color: #1f1f1f; /* Changed footer background */
 				background-image: url("images/overlay.png"), url("../../images/bg.jpg");
 				background-position: top left,						bottom center;
 				background-repeat: repeat,							no-repeat;
@@ -3088,6 +3096,7 @@ input, select, textarea {
 				position: relative;
 				text-align: center;
 				width: 100%;
+				color: #ffffff; /* Changed footer text color to brighter */
 			}
 
 				#footer .icons {
