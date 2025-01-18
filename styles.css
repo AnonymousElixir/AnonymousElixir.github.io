@@ -5,7 +5,7 @@
     box-sizing: border-box;
     transition: all 0.3s ease; /* Smooth transitions for all elements */
 }
-
+ 
 body {
     font-family: 'Poppins', sans-serif;
     background: #f4f4f4; /* Neutral background for a professional look */
