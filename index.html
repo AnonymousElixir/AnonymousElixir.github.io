@@ -1,73 +1,361 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cassidy Camp</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #00FF00;
+            font-family: "Courier New", monospace;
+            line-height: 1.4;
+            overflow: hidden;
+        }
+        
+        .bios-container {
+            width: 100vw;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: auto;
+        }
+        
+        .bios-header {
+            border-bottom: 1px solid #00FF00;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .bios-title {
+            font-size: 24px;
+            margin: 0;
+        }
+        
+        .bios-subtitle {
+            font-size: 16px;
+            margin: 5px 0 0;
+            color: #AAA;
+        }
+        
+        .bios-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            background-color: #001100;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table td, table th {
+            padding: 5px;
+            border: 1px solid #003300;
+        }
+        
+        table th {
+            background-color: #002200;
+            text-align: left;
+        }
+        
+        .bios-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #001100;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .key-command {
+            margin-right: 15px;
+        }
+        
+        .key {
+            background-color: #003300;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+        
+        .bios-menu {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .bios-menu li {
+            padding: 5px;
+            cursor: pointer;
+        }
+        
+        .bios-menu li.selected {
+            background-color: #00FF00;
+            color: #000;
+        }
+        .terminal-line {
+            position: relative;
+            animation: typing 2s steps(60, end);
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 5px 0;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: #00FF00;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        .system-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .hardware-specs {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 5px;
+        }
+        
+        .hardware-specs div:nth-child(odd) {
+            font-weight: bold;
+        }
+        
+        .memory-bar {
+            height: 20px;
+            background-color: #003300;
+            margin-top: 5px;
+            position: relative;
+        }
+        
+        .memory-used {
+            height: 100%;
+            width: 65%;
+            background-color: #00FF00;
+        }
+        
+        .loading-dots::after {
+            content: ' ';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
 
-	<title>Cassidy Camp | Awesome Dev</title>
-
-	<link rel="icon" href="favicon.ico" type="image/png" />
-
-	<link href="https://fonts.googleapis.com/css?family=Reem+Kufi|Roboto:300" rel="stylesheet">
-	<link href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/styles.css">
-	<!-- <link rel="stylesheet" href="css/themes/indigo-white.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/green-white.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/red-white.css"> -->
-	<link rel="stylesheet" href="css/themes/grey-white.css">
-	<!-- <link rel="stylesheet" href="css/themes/white-indigo.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/white-blue.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/white-grey.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/white-red.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/yellow-black.css"> -->
+        @keyframes dots {
+            0%, 20% { content: ' '; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+    </style>
 </head>
 <body>
-	<main>
-		<div class="intro">Hello, I'm Cassidy Camp!</div>
-		<div class="tagline"> 3D Designer | Web Developer | Ethical Hacker </div>
-		<!-- Find your icons from here - https://fontawesome.com/icons?d=gallery&s=brands -->
-		<div class="icons-social">
-			<a target="_blank" href="https://github.com/AnonymousElixir">
-        <i class="fab fa-github" aria-hidden="true" title="Github"></i>
-        <span class="sr-only">Github</span>
-      </a>
-      <a target="_blank" href="https://www.youtube.com/@cassidyc3d">
-        <i class="fab fa-youtube" aria-hidden="true" title="Twitter"></i>
-        <span class="sr-only">Youtube</span>
-      </a>
+    <div class="bios-container">
+        <div class="bios-header">
+            <h1 class="bios-title">Cassidy's Portfolio v3.7.2</h1>
+        </div>
+        
+        <div class="bios-section">
+            <div class="section-title">SYSTEM INFORMATION</div>
+            <div class="system-info">
+                <div class="system-column">
+                    <div class="hardware-specs">
+                        <div>Developer:</div>
+                        <div>Cassidy Camp</div>
+                        <div>Version:</div>
+                        <div>Dev-3.7.2</div>
+                        <div>Languages:</div>
+                        <div>JavaScript, Python, HTML, CSS, JS</div>
+                        <div>Frameworks:</div>
+                        <div>React, Node.js, <strong>Flask</strong></div>
+                        <div>Build Date:</div>
+                        <div>03/06/2025</div>
+                        <div>UUID:</div>
+                        <div>ad61a563-89be-459b-958a-dd724a7dd065</div>
+                    </div>
+                </div>
+                <div class="system-column">
+                    <div>System Resources:</div>
+                    <div>Memory Usage: 65%</div>
+                    <div class="memory-bar">
+                        <div class="memory-used"></div>
+                    </div>
+                    <div>CPU Load: Normal</div>
+                    <div>Current Status: Ready</div>
+                    <div>Last Commit: 03/06/2025</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bios-section">
+            <div class="section-title">DEVELOPER SKILLS</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Skill Category</th>
+                        <th>Proficiency</th>
+                        <th>Last Used</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Front-End Development</td>
+                        <td>Level 3 (Intermediate)</td>
+                        <td>Current</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>Back-End Development</td>
+                        <td>Level 4 (Advanced)</td>
+                        <td>Current</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>Database Management</td>
+                        <td>Level 3 (Intermediate)</td>
+                        <td>Recently</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>UI/UX Design</td>
+                        <td>Level 2 (Basic)</td>
+                        <td>Current</td>
+                        <td>Active</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="bios-section">
+            <div class="section-title">PROJECT HISTORY</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Version</th>
+                        <th>Completion Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Xspect.cc</td>
+                        <td>v1.0.0</td>
+                        <td>03/06/2025</td>
+                        <td>In Development</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://cassidycamp.work/no-ping/en/">No-Ping</a></td>
+                        <td>v1.0.0</td>
+                        <td>???</td>
+                        <td>Production</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="bios-section">
+            <div class="section-title">CONTACT INTERFACES</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Interface</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Email</td>
+                        <td>cassidy@cassidycamp.work</td>
+                        <td>Online</td>
+                    </tr>
+                    <tr>
+                        <td>GitHub</td>
+                        <td>github.com/AnonymousElixir</td>
+                        <td>Online</td>
+                    </tr>
+                    <tr>
+                        <td>Twitter</td>
+                        <td>x.com/FlipMods</td>
+                        <td>Idle</td>
+                    </tr>
+                    <tr>
+                        <td>Personal Website</td>
+                        <td>cassidycamp.work</td>
+                        <td>Your here now!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="bios-section">
+            <div class="section-title">SYSTEM BOOT OPTIONS</div>
+            <ul class="bios-menu">
+                <li class="selected">Load Portfolio</li>
+                <li>Run Diagnostics</li>
+                <li>Project Showcase</li>
+                <li>Contact Interface</li>
+                <li>Resume Download</li>
+                <li>System Credits</li>
+            </ul>
+        </div>
+        
+        <div class="terminal-line">Press any key to continue<span class="cursor"></span></div>
     </div>
-    	<div class="card">
-	    <h3 class="card__title">My Thoughts on WOC.
-	    </h3>
-	    <p class="card__content">Click to see my thoughts on the world of coding discord server (Click The Arrow)</p>
-	    <div class="card__date">
-		December 26, 2024
-	    </div>
-	    <a href="https://gitlab.com/anonelix/blog-posts/-/raw/main/00001.txt">
-	    <div class="card__arrow">
-		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-		    <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-		</svg>
-	    </div>
-	    </a>
-	</div>
-	<div class="card">
-	    <h3 class="card__title">[CW] Nexity/Danner/Ronix
-	    </h3>
-	    <p class="card__content">Click to see my exposé of nexity (Click The Arrow)</p>
-	    <div class="card__date">
-		January 12, 2025
-	    </div>
-	    <a href="https://gitlab.com/anonelix/blog-posts/-/raw/main/00001.txt">
-	    <div class="card__arrow">
-		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
-		    <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
-		</svg>
-	    </div>
-	    </a>
-	</div>
-	</main>
+    
+    <div class="bios-footer">
+        <div>
+            <span class="key-command"><span class="key">↑↓</span> Navigate</span>
+            <span class="key-command"><span class="key">Enter</span> Select</span>
+            <span class="key-command"><span class="key">Esc</span> Back</span>
+        </div>
+        <div>Cassidy's BIOS © 2025</div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const lines = document.querySelectorAll('.terminal-line');
+            const lastLine = lines[lines.length - 1];
+            const menuItems = document.querySelectorAll('.bios-menu li');
+            let selectedIndex = 0;
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowUp') {
+                    menuItems[selectedIndex].classList.remove('selected');
+                    selectedIndex = (selectedIndex > 0) ? selectedIndex - 1 : menuItems.length - 1;
+                    menuItems[selectedIndex].classList.add('selected');
+                } else if (e.key === 'ArrowDown') {
+                    menuItems[selectedIndex].classList.remove('selected');
+                    selectedIndex = (selectedIndex < menuItems.length - 1) ? selectedIndex + 1 : 0;
+                    menuItems[selectedIndex].classList.add('selected');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
