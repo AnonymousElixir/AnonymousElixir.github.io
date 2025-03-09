@@ -1,198 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebHook Tools</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <style>
-        .dark,.dark .dark-input{--tw-bg-opacity:1;color:rgba(243,244,246,var(--tw-text-opacity))}.dark{background-color:rgba(17,24,39,var(--tw-bg-opacity))}.dark .dark-card{--tw-bg-opacity:1;background-color:rgba(31,41,55,var(--tw-bg-opacity));--tw-border-opacity:1;border-color:rgba(55,65,81,var(--tw-border-opacity))}.dark .dark-input{background-color:rgba(17,24,39,var(--tw-bg-opacity));--tw-border-opacity:1;border-color:rgba(75,85,99,var(--tw-border-opacity))}.spinner{border:3px solid rgba(255,255,255,.3);border-radius:50%;border-top:3px solid #fff;width:16px;height:16px;animation:1s linear infinite spin;margin-right:6px;display:none}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C9FZ's Webhook Tools</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+<style>
+.dark{--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}.tab-active{border-bottom:2px solid #6366f1}.json-field{font-family:monospace}
+</style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
-        <div class="flex justify-between items-center mb-8">
-            <h1 class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">WebHook Tools</h1>
-            <button id="themeToggle" class="p-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
-                Toggle Dark Mode
-            </button>
-        </div>
-        <div class="mb-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-            <h2 class="text-xl font-semibold mb-4 text-indigo-600 dark:text-indigo-400">WebHook Deleter</h2>
-            <div class="mb-4">
-                <label class="block text-gray-700 dark:text-gray-300 mb-2" for="deleteurl">Webhook URL to Delete</label>
-                <input type="url" id="deleteurl" placeholder="https://example.com/webhook" 
-                    class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-            </div>
-            <button onclick="deletewebhook()" class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md flex items-center">
-                <span class="spinner" id="deleteLoading"></span>
-                Delete Webhook
-            </button>
-            <div id="deleteStatus" class="mt-3 p-3 rounded-md hidden"></div>
-        </div>
-        <div class="mb-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-            <h2 class="text-xl font-semibold mb-4 text-indigo-600 dark:text-indigo-400">WebHook JSON Sender</h2>
-            <div class="mb-4">
-                <label class="block text-gray-700 dark:text-gray-300 mb-2" for="url">Webhook URL</label>
-                <input type="url" id="url" placeholder="https://example.com/webhook" 
-                    class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 dark:text-gray-300 mb-2" for="json">JSON Payload</label>
-                <textarea id="json" placeholder='{"content": "Hello World"}' rows="5"
-                    class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
-            </div>
-            <button onclick="sendjson()" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md flex items-center">
-                <span class="spinner" id="sendLoading"></span>
-                Send JSON
-            </button>
-            <div id="sendStatus" class="mt-3 p-3 rounded-md hidden"></div>
-        </div>
-        <div class="mb-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-            <h2 class="text-xl font-semibold mb-4 text-indigo-600 dark:text-indigo-400">WebHook JSON Getter</h2>
-            <div class="mb-4">
-                <label class="block text-gray-700 dark:text-gray-300 mb-2" for="geturl">Webhook URL</label>
-                <input type="url" id="geturl" placeholder="https://example.com/webhook" 
-                    class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-            </div>
-            <button onclick="getjson()" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md flex items-center">
-                <span class="spinner" id="getLoading"></span>
-                Get JSON
-            </button>
-            <div class="mt-4">
-                <label class="block text-gray-700 dark:text-gray-300 mb-2" for="getjson">Response</label>
-                <textarea id="getjson" placeholder="JSON response will appear here" rows="5" readonly
-                    class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"></textarea>
-            </div>
-            <div id="getStatus" class="mt-3 p-3 rounded-md hidden"></div>
-        </div>
-        <div class="mb-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-            <h2 class="text-xl font-semibold mb-4 text-indigo-600 dark:text-indigo-400">WebHook Spammer</h2>
-            <div class="mb-4">
-                <label class="block text-gray-700 dark:text-gray-300 mb-2" for="spamurl">Webhook URL</label>
-                <input type="url" id="spamurl" placeholder="https://example.com/webhook" 
-                    class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 dark:text-gray-300 mb-2" for="spamcontent">Message Content</label>
-                <textarea id="spamcontent" placeholder="Message to spam" rows="3"
-                    class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
-            </div>
-            <div class="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                    <label class="block text-gray-700 dark:text-gray-300 mb-2" for="spamcount">Number of Messages</label>
-                    <input type="number" id="spamcount" value="10" min="1" max="100" 
-                        class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                </div>
-                <div>
-                    <label class="block text-gray-700 dark:text-gray-300 mb-2" for="spamdelay">Delay (ms)</label>
-                    <input type="number" id="spamdelay" value="1000" min="500" 
-                        class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                </div>
-            </div>
-            <div class="flex space-x-4">
-                <button onclick="startSpam()" id="spamButton" class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md flex items-center">
-                    <span class="spinner" id="spamLoading"></span>
-                    Start Spamming
-                </button>
-                <button onclick="stopSpam()" id="stopSpamButton" class="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded-md hidden">
-                    Stop Spamming
-                </button>
-            </div>
-            <div class="mt-3">
-                <div id="spamProgress" class="h-2 bg-gray-300 dark:bg-gray-600 rounded-full mt-2 overflow-hidden hidden">
-                    <div id="spamProgressBar" class="h-full bg-green-500" style="width: 0%"></div>
-                </div>
-                <p id="spamStatus" class="mt-2 text-sm text-gray-600 dark:text-gray-400"></p>
-            </div>
-        </div>
-
-        <div class="mb-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-            <h2 class="text-xl font-semibold mb-4 text-indigo-600 dark:text-indigo-400">Discord Embed Builder</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                    <label class="block text-gray-700 dark:text-gray-300 mb-2" for="embedWebhookUrl">Webhook URL</label>
-                    <input type="url" id="embedWebhookUrl" placeholder="https://discord.com/api/webhooks/..." 
-                        class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                </div>
-                <div>
-                    <label class="block text-gray-700 dark:text-gray-300 mb-2" for="embedUsername">Username (Optional)</label>
-                    <input type="text" id="embedUsername" placeholder="Webhook Bot" 
-                        class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                </div>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-gray-700 dark:text-gray-300 mb-2" for="embedContent">Message Content (Optional)</label>
-                <input type="text" id="embedContent" placeholder="Message above the embed" 
-                    class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-            </div>
-            
-            <div class="mb-4 p-4 border border-gray-300 dark:border-gray-600 rounded-md">
-                <h3 class="text-lg font-medium mb-3 text-gray-800 dark:text-gray-200">Embed</h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label class="block text-gray-700 dark:text-gray-300 mb-2" for="embedTitle">Title</label>
-                        <input type="text" id="embedTitle" placeholder="Embed Title" 
-                            class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 dark:text-gray-300 mb-2" for="embedColor">Color</label>
-                        <input type="color" id="embedColor" value="#5865F2" 
-                            class="w-full p-1 h-11 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700">
-                    </div>
-                </div>
-                
-                <div class="mb-4">
-                    <label class="block text-gray-700 dark:text-gray-300 mb-2" for="embedDescription">Description</label>
-                    <textarea id="embedDescription" placeholder="Embed description text" rows="3"
-                        class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label class="block text-gray-700 dark:text-gray-300 mb-2" for="embedAuthor">Author Name</label>
-                        <input type="text" id="embedAuthor" placeholder="Author name" 
-                            class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 dark:text-gray-300 mb-2" for="embedFooter">Footer Text</label>
-                        <input type="text" id="embedFooter" placeholder="Footer text" 
-                            class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
-                </div>
-                
-                <div class="mb-4">
-                    <label class="block text-gray-700 dark:text-gray-300 mb-2" for="embedImageUrl">Image URL (Optional)</label>
-                    <input type="url" id="embedImageUrl" placeholder="https://example.com/image.png" 
-                        class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                </div>
-                
-                <div class="mb-4">
-                    <label class="block text-gray-700 dark:text-gray-300 mb-2" for="embedThumbnailUrl">Thumbnail URL (Optional)</label>
-                    <input type="url" id="embedThumbnailUrl" placeholder="https://example.com/thumbnail.png" 
-                        class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                </div>
-            </div>
-            
-            <div class="flex items-center space-x-4">
-                <button onclick="sendEmbed()" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md flex items-center">
-                    <span class="spinner" id="embedLoading"></span>
-                    Send Embed
-                </button>
-                <button onclick="generateEmbedJSON()" class="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded-md">
-                    Generate JSON
-                </button>
-            </div>
-            <div id="embedStatus" class="mt-3 p-3 rounded-md hidden"></div>
-        </div>
-    </div>
-
-    <script>
-        const themeToggle=document.getElementById("themeToggle");function showLoading(e){document.getElementById(e).style.display="inline-block"}function hideLoading(e){document.getElementById(e).style.display="none"}function showStatus(e,t,n){let a=document.getElementById(e);a.textContent=t,a.className=`mt-3 p-3 rounded-md ${n?"bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200":"bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"}`,a.classList.remove("hidden"),setTimeout(()=>{a.classList.add("hidden")},5e3)}function deletewebhook(){let e=document.getElementById("deleteurl").value;if(!e){showStatus("deleteStatus","Please enter a valid URL",!1);return}showLoading("deleteLoading"),$.ajax({type:"DELETE",url:e,success:function(e){hideLoading("deleteLoading"),showStatus("deleteStatus","Webhook deleted successfully",!0)},error:function(e,t,n){hideLoading("deleteLoading"),showStatus("deleteStatus",`Error: ${e.status} ${n}`,!1)}})}function sendjson(){let e=document.getElementById("url").value,t=document.getElementById("json").value;if(!e){showStatus("sendStatus","Please enter a valid URL",!1);return}if(!t){showStatus("sendStatus","Please enter JSON data",!1);return}try{let n=JSON.parse(t);showLoading("sendLoading"),$.ajax({type:"POST",url:e,data:JSON.stringify(n),contentType:"application/json",success:function(e){hideLoading("sendLoading"),showStatus("sendStatus","JSON sent successfully",!0)},error:function(e,t,n){hideLoading("sendLoading"),showStatus("sendStatus",`Error: ${e.status} ${n}`,!1)}})}catch(a){showStatus("sendStatus","Invalid JSON format: "+a.message,!1)}}function getjson(){let e=document.getElementById("geturl").value,t=document.getElementById("getjson");if(!e){showStatus("getStatus","Please enter a valid URL",!1);return}showLoading("getLoading"),t.value="Loading...",$.ajax({type:"GET",url:e,contentType:"application/json",success:function(e){hideLoading("getLoading");try{t.value=JSON.stringify(e,null,4),showStatus("getStatus","Data retrieved successfully",!0)}catch(n){t.value=e,showStatus("getStatus","Response received (not JSON format)",!0)}},error:function(e,n,a){hideLoading("getLoading"),t.value="",showStatus("getStatus",`Error: ${e.status} ${a}`,!1)}})}"false"===localStorage.getItem("darkMode")?document.documentElement.classList.remove("dark"):(document.documentElement.classList.add("dark"),localStorage.setItem("darkMode","true")),themeToggle.addEventListener("click",()=>{document.documentElement.classList.toggle("dark"),localStorage.setItem("darkMode",document.documentElement.classList.contains("dark"))});let spamInterval,currentSpamCount=0,totalSpamCount=0;function startSpam(){let e=document.getElementById("spamurl").value,t=document.getElementById("spamcontent").value,n=parseInt(document.getElementById("spamcount").value),a=parseInt(document.getElementById("spamdelay").value);if(!e){showStatus("spamStatus","Please enter a valid URL",!1);return}if(!t){showStatus("spamStatus","Please enter message content",!1);return}if(isNaN(n)||n<1){showStatus("spamStatus","Please enter a valid number of messages",!1);return}if(isNaN(a)||a<500){showStatus("spamStatus","Delay must be at least 500ms",!1);return}document.getElementById("spamButton").classList.add("hidden"),document.getElementById("stopSpamButton").classList.remove("hidden"),document.getElementById("spamProgress").classList.remove("hidden"),document.getElementById("spamProgressBar").style.width="0%",document.getElementById("spamStatus").textContent=`Sending 0/${n} messages...`,currentSpamCount=0,totalSpamCount=n,spamInterval=setInterval(()=>{sendSpamMessage(e,t,n)},a)}function sendSpamMessage(e,t,n){if(currentSpamCount>=n){stopSpam(),document.getElementById("spamStatus").textContent=`Completed! Sent ${n} messages.`;return}$.ajax({type:"POST",url:e,data:JSON.stringify({content:t}),contentType:"application/json",success:function(){currentSpamCount++;let e=currentSpamCount/totalSpamCount*100;document.getElementById("spamProgressBar").style.width=`${e}%`,document.getElementById("spamStatus").textContent=`Sending ${currentSpamCount}/${totalSpamCount} messages...`},error:function(e,t,n){document.getElementById("spamStatus").textContent=`Error: ${e.status} ${n}`,stopSpam()}})}function stopSpam(){clearInterval(spamInterval),document.getElementById("spamButton").classList.remove("hidden"),document.getElementById("stopSpamButton").classList.add("hidden")}function generateEmbedJSON(){let e=buildEmbedData();document.getElementById("json").value=JSON.stringify(e,null,2),document.querySelector("h2:contains('WebHook JSON Sender')").scrollIntoView({behavior:"smooth"})}function sendEmbed(){let e=document.getElementById("embedWebhookUrl").value;if(!e){showStatus("embedStatus","Please enter a webhook URL",!1);return}let t=buildEmbedData();showLoading("embedLoading"),$.ajax({type:"POST",url:e,data:JSON.stringify(t),contentType:"application/json",success:function(){hideLoading("embedLoading"),showStatus("embedStatus","Embed sent successfully",!0)},error:function(e,t,n){hideLoading("embedLoading"),showStatus("embedStatus",`Error: ${e.status} ${n}`,!1)}})}function buildEmbedData(){let e=document.getElementById("embedUsername").value,t=document.getElementById("embedContent").value,n=document.getElementById("embedTitle").value,a=document.getElementById("embedDescription").value,s=parseInt(document.getElementById("embedColor").value.replace("#",""),16),o=document.getElementById("embedAuthor").value,d=document.getElementById("embedFooter").value,l=document.getElementById("embedImageUrl").value,u=document.getElementById("embedThumbnailUrl").value,r={title:n,description:a,color:s};o&&(r.author={name:o}),d&&(r.footer={text:d}),l&&(r.image={url:l}),u&&(r.thumbnail={url:u});let i={embeds:[r]};return e&&(i.username=e),t&&(i.content=t),i}document.getElementById("json").addEventListener("blur",function(){try{let e=JSON.parse(this.value);this.value=JSON.stringify(e,null,2)}catch(t){}});
-    </script>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+<div class="container mx-auto px-4 py-8 max-w-5xl">
+<header class="mb-8 pb-4 border-b border-gray-700">
+<h1 class="text-3xl font-bold text-indigo-400 mb-2">C9FZ's Webhook Tools</h1>
+<p class="text-gray-400">Advanced tools for webhook management & testing</p>
+</header>
+<div class="flex mb-4 border-b border-gray-700">
+<button class="px-4 py-2 tab-active" data-tab="sender">Sender</button>
+<button class="px-4 py-2" data-tab="deleter">Deleter</button>
+<button class="px-4 py-2" data-tab="getter">Getter</button>
+<button class="px-4 py-2" data-tab="spammer">Spammer</button>
+<button class="px-4 py-2" data-tab="embed">Embed Builder</button>
+</div>
+<div id="tab-content">
+<div class="tab-panel active" id="sender-panel">
+<div class="bg-gray-800 rounded-lg p-4 mb-4 shadow-lg">
+<h2 class="text-xl font-semibold text-indigo-300 mb-4">JSON Sender</h2>
+<div class="mb-4">
+<label class="block mb-2 font-medium">Webhook URL</label>
+<input type="url" id="url" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+</div>
+<div class="mb-4">
+<label class="block mb-2 font-medium">JSON Payload</label>
+<textarea id="json" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 json-field" rows="6">{"content":"Hello World"}</textarea>
+</div>
+<button onclick="sendjson()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">Send JSON</button>
+<div id="sendStatus" class="mt-4 p-3 rounded hidden"></div>
+</div>
+</div>
+<div class="tab-panel hidden" id="deleter-panel">
+<div class="bg-gray-800 rounded-lg p-4 mb-4 shadow-lg">
+<h2 class="text-xl font-semibold text-indigo-300 mb-4">Webhook Deleter</h2>
+<div class="mb-4">
+<label class="block mb-2 font-medium">Webhook URL</label>
+<input type="url" id="deleteurl" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+</div>
+<button onclick="deletewebhook()" class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-500">Delete Webhook</button>
+<div id="deleteStatus" class="mt-4 p-3 rounded hidden"></div>
+</div>
+</div>
+<div class="tab-panel hidden" id="getter-panel">
+<div class="bg-gray-800 rounded-lg p-4 mb-4 shadow-lg">
+<h2 class="text-xl font-semibold text-indigo-300 mb-4">JSON Getter</h2>
+<div class="mb-4">
+<label class="block mb-2 font-medium">Webhook URL</label>
+<input type="url" id="geturl" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+</div>
+<button onclick="getjson()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">Get JSON</button>
+<div class="mt-4">
+<label class="block mb-2 font-medium">Response</label>
+<textarea id="getjson" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none json-field" rows="8" readonly></textarea>
+</div>
+<div id="getStatus" class="mt-4 p-3 rounded hidden"></div>
+</div>
+</div>
+<div class="tab-panel hidden" id="spammer-panel">
+<div class="bg-gray-800 rounded-lg p-4 mb-4 shadow-lg">
+<h2 class="text-xl font-semibold text-indigo-300 mb-4">Webhook Spammer</h2>
+<div class="mb-4">
+<label class="block mb-2 font-medium">Webhook URL</label>
+<input type="url" id="spamurl" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+</div>
+<div class="mb-4">
+<label class="block mb-2 font-medium">Message Content</label>
+<input type="text" id="spamcontent" value="Spam message" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+</div>
+<div class="mb-4 grid grid-cols-2 gap-4">
+<div>
+<label class="block mb-2 font-medium">Number of Messages</label>
+<input type="number" id="spamcount" value="10" min="1" max="100" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+</div>
+<div>
+<label class="block mb-2 font-medium">Delay (ms)</label>
+<input type="number" id="spamdelay" value="500" min="100" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+</div>
+</div>
+<div class="flex space-x-4">
+<button onclick="startSpam()" class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-500">Start Spamming</button>
+<button onclick="stopSpam()" class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-gray-500">Stop</button>
+</div>
+<div class="mt-4">
+<div class="w-full bg-gray-700 rounded h-2">
+<div id="spamProgress" class="bg-indigo-500 h-2 rounded" style="width: 0%"></div>
+</div>
+<p id="spamStatus" class="mt-2 text-gray-400">Ready</p>
+</div>
+</div>
+</div>
+<div class="tab-panel hidden" id="embed-panel">
+<div class="bg-gray-800 rounded-lg p-4 mb-4 shadow-lg">
+<h2 class="text-xl font-semibold text-indigo-300 mb-4">Discord Embed Builder</h2>
+<div class="mb-4">
+<label class="block mb-2 font-medium">Webhook URL</label>
+<input type="url" id="embedurl" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<div class="mb-4">
+<label class="block mb-2 font-medium">Author Name</label>
+<input type="text" id="embed-author" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+</div>
+<div class="mb-4">
+<label class="block mb-2 font-medium">Title</label>
+<input type="text" id="embed-title" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+</div>
+<div class="mb-4">
+<label class="block mb-2 font-medium">Description</label>
+<textarea id="embed-desc" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" rows="3"></textarea>
+</div>
+<div class="mb-4">
+<label class="block mb-2 font-medium">Embed Color</label>
+<input type="color" id="embed-color" value="#5865F2" class="w-full bg-gray-700 border border-gray-600 rounded h-10">
+</div>
+<div class="mb-4">
+<label class="block mb-2 font-medium">Footer Text</label>
+<input type="text" id="embed-footer" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+</div>
+</div>
+<div class="bg-gray-900 rounded-lg p-4 border border-gray-700">
+<p class="text-sm mb-2 text-gray-400">Preview (approximate)</p>
+<div id="embed-preview" class="border-l-4 pl-3 py-2 bg-gray-800">
+<div id="preview-author" class="text-sm mb-1"></div>
+<div id="preview-title" class="font-bold mb-1"></div>
+<div id="preview-desc" class="text-sm mb-2"></div>
+<div id="preview-footer" class="text-xs text-gray-400 mt-2"></div>
+</div>
+<div class="mt-4">
+<label class="block mb-2 font-medium">Generated JSON</label>
+<textarea id="embed-json" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none json-field" rows="6" readonly></textarea>
+</div>
+</div>
+</div>
+<div class="mt-4">
+<button onclick="sendEmbed()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">Send Embed</button>
+<div id="embedStatus" class="mt-4 p-3 rounded hidden"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+let spamInterval=null;function switchTab(e){document.querySelectorAll(".tab-panel").forEach(a=>{a.classList.add("hidden")}),document.querySelectorAll("[data-tab]").forEach(a=>{a.classList.remove("tab-active")}),e.classList.add("tab-active");let t=e.getAttribute("data-tab");document.getElementById(`${t}-panel`).classList.remove("hidden")}document.querySelectorAll("[data-tab]").forEach(e=>{e.addEventListener("click",function(){switchTab(this)})});function showStatus(e,t,a){let n=document.getElementById(e);n.textContent=t,n.classList.remove("hidden","bg-green-900","bg-red-900","text-green-300","text-red-300"),n.classList.add(a?"bg-green-900 text-green-300":"bg-red-900 text-red-300"),setTimeout(()=>{n.classList.add("hidden")},5e3)}function deletewebhook(){let e=document.getElementById("deleteurl").value;e?$.ajax({type:"DELETE",url:e,success:function(){showStatus("deleteStatus","Webhook deleted successfully",!0)},error:function(e){showStatus("deleteStatus",`Error: ${e.status}`,!1)}}):showStatus("deleteStatus","Please enter a URL",!1)}function sendjson(){let e=document.getElementById("url").value,t=document.getElementById("json").value;if(!e)return showStatus("sendStatus","Please enter a URL",!1);if(!t)return showStatus("sendStatus","Please enter JSON data",!1);try{let a=JSON.parse(t);$.ajax({type:"POST",url:e,data:JSON.stringify(a),contentType:"application/json",success:function(){showStatus("sendStatus","JSON sent successfully",!0)},error:function(e){showStatus("sendStatus",`Error: ${e.status}`,!1)}})}catch(e){showStatus("sendStatus","Invalid JSON format",!1)}}function getjson(){let e=document.getElementById("geturl").value,t=document.getElementById("getjson");e?(t.value="Loading...",$.ajax({type:"GET",url:e,contentType:"application/json",success:function(e){try{t.value=JSON.stringify(e,null,2),showStatus("getStatus","Data retrieved successfully",!0)}catch{t.value=e,showStatus("getStatus","Response received (not JSON)",!0)}},error:function(e){t.value="",showStatus("getStatus",`Error: ${e.status}`,!1)}})):showStatus("getStatus","Please enter a URL",!1)}function startSpam(){if(spamInterval)return;let e=document.getElementById("spamurl").value;if(!e)return showStatus("spamStatus","Please enter a URL",!1);let t=document.getElementById("spamcontent").value,a=parseInt(document.getElementById("spamcount").value),n=parseInt(document.getElementById("spamdelay").value),s=0,d=document.getElementById("spamProgress"),r=document.getElementById("spamStatus");d.style.width="0%",r.textContent="Sending...";spamInterval=setInterval(()=>{if(s>=a)return stopSpam(),void(r.textContent="Completed");let n={content:t};$.ajax({type:"POST",url:e,data:JSON.stringify(n),contentType:"application/json",success:function(){s++,d.style.width=`${s/a*100}%`,r.textContent=`Sent ${s}/${a}`},error:function(){s++,d.style.width=`${s/a*100}%`,r.textContent=`Error on message ${s}/${a}`}})},n)}function stopSpam(){spamInterval&&(clearInterval(spamInterval),spamInterval=null,document.getElementById("spamStatus").textContent="Stopped")}function updateEmbedPreview(){let e=document.getElementById("embed-author").value,t=document.getElementById("embed-title").value,a=document.getElementById("embed-desc").value,n=document.getElementById("embed-color").value,s=document.getElementById("embed-footer").value,d=document.getElementById("preview-author"),r=document.getElementById("preview-title"),l=document.getElementById("preview-desc"),o=document.getElementById("preview-footer"),c=document.getElementById("embed-preview"),u=document.getElementById("embed-json"),m={embeds:[{author:e?{name:e}:void 0,title:t||void 0,description:a||void 0,color:parseInt(n.replace("#",""),16),footer:s?{text:s}:void 0}]};d.textContent=e||"",r.textContent=t||"",l.textContent=a||"",o.textContent=s||"",c.style.borderColor=n,u.value=JSON.stringify(m,null,2)}function sendEmbed(){let e=document.getElementById("embedurl").value;if(!e)return showStatus("embedStatus","Please enter a webhook URL",!1);let t=document.getElementById("embed-json").value;try{let a=JSON.parse(t);$.ajax({type:"POST",url:e,data:t,contentType:"application/json",success:function(){showStatus("embedStatus","Embed sent successfully",!0)},error:function(e){showStatus("embedStatus",`Error: ${e.status}`,!1)}})}catch(e){showStatus("embedStatus","Invalid JSON format",!1)}}document.querySelectorAll("#embed-author, #embed-title, #embed-desc, #embed-color, #embed-footer").forEach(e=>{e.addEventListener("input",updateEmbedPreview)});updateEmbedPreview();document.getElementById("json").addEventListener("blur",function(){try{let e=JSON.parse(this.value);this.value=JSON.stringify(e,null,2)}catch{}});
+</script>
 </body>
 </html>
