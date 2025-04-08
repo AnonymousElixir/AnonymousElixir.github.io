@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Checking destination...</title>
+  <title>Checking site status...</title>
   <style>
     body {
       font-family: sans-serif;
@@ -14,37 +14,51 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <h1>Redirecting...</h1>
-  <p id="status">Checking destination availability...</p>
+  <p id="status">Checking me.cassidycamp.work for errors...</p>
 
   <script>
-    async function checkAndRedirect() {
-      const primary = 'https://me.cassidycamp.work/';
-      const fallback = 'https://cassidycamp.work/index-old.html';
+    const primaryURL = "https://me.cassidycamp.work/";
+    const fallbackURL = "https://cassidycamp.work/index-old.html";
 
+    async function checkAndRedirect() {
       try {
         const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 1000);
+        const timeout = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
-        await fetch(primary, {
-          method: 'HEAD',
-          mode: 'no-cors',
-          signal: controller.signal
+        const response = await fetch(primaryURL, {
+          method: "GET",
+          mode: "cors",
+          signal: controller.signal,
         });
 
         clearTimeout(timeout);
-        window.location.replace(primary);
-      } catch (error) {
-        console.warn("Primary site unreachable. Redirecting to fallback...");
-        document.getElementById('status').textContent =
-          'Primary site is unavailable. Redirecting to fallback...';
-        setTimeout(() => {
-          window.location.replace(fallback);
-        }, 1500);
+
+        const text = await response.text();
+
+        const isBadGateway =
+          text.includes("502 Bad Gateway") ||
+          text.includes("Unable to reach the origin service") ||
+          text.includes("cloudflared");
+
+        if (isBadGateway) {
+          document.getElementById("status").textContent =
+            "Primary site is returning an error. Redirecting to fallback...";
+          console.warn("502 or Cloudflare error detected in response.");
+          setTimeout(() => window.location.replace(fallbackURL), 1500);
+        } else {
+          window.location.replace(primaryURL);
+        }
+      } catch (err) {
+        console.error("Failed to fetch primary site:", err);
+        document.getElementById("status").textContent =
+          "Primary site is unreachable. Redirecting to fallback...";
+        setTimeout(() => window.location.replace(fallbackURL), 1500);
       }
     }
 
