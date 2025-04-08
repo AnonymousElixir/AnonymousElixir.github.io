@@ -2,14 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=https://me.cassidycamp.work/">
-  <title>Redirecting...</title>
-  <script>
-    // Extra safety in case meta tag fails
-    window.location.replace("https://me.cassidycamp.work/");
-  </script>
+  <title>Checking destination...</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #111;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
-  <p>If you are not redirected, <a href="https://me.cassidycamp.work/">click here</a>.</p>
+  <h1>Redirecting...</h1>
+  <p id="status">Checking destination availability...</p>
+
+  <script>
+    async function checkAndRedirect() {
+      const primary = 'https://me.cassidycamp.work/';
+      const fallback = 'https://cassidycamp.work/index-old.html';
+
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 1000);
+
+        await fetch(primary, {
+          method: 'HEAD',
+          mode: 'no-cors',
+          signal: controller.signal
+        });
+
+        clearTimeout(timeout);
+        window.location.replace(primary);
+      } catch (error) {
+        console.warn("Primary site unreachable. Redirecting to fallback...");
+        document.getElementById('status').textContent =
+          'Primary site is unavailable. Redirecting to fallback...';
+        setTimeout(() => {
+          window.location.replace(fallback);
+        }, 1500);
+      }
+    }
+
+    checkAndRedirect();
+  </script>
 </body>
 </html>
