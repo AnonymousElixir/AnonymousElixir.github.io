@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cassidy Camp</title>
-    <meta name="description" content="Portfolio of Cassidy Camp showcasing expertise in html, css and js. View projects, experience, and contact information.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cassidy Camp</title>
+  <meta name="description" content="Portfolio of Cassidy Camp showcasing expertise in html, css and js. View projects, experience, and contact information.">
     <meta property="og:title" content="Cassidy Camp - My Portfolio">
     <meta property="og:description" content="Explore my projects.">
     <meta property="og:image" content="https://i.ibb.co/LzD4Cnyp/image.png">
@@ -17,344 +17,114 @@
     <meta name="keywords" content="Cassidy Camp, portfolio">
     <meta name="author" content="Cassidy Camp">
     <link rel="canonical" href="https://cassidycamp.work">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: #00FF00;
-            font-family: "Courier New", monospace;
-            line-height: 1.4;
-            overflow: hidden;
-        }
-        
-        .bios-container {
-            width: 100vw;
-            height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-            position: relative;
-            overflow: auto;
-        }
-        
-        .bios-header {
-            border-bottom: 1px solid #00FF00;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .bios-title {
-            font-size: 24px;
-            margin: 0;
-        }
-        
-        .bios-subtitle {
-            font-size: 16px;
-            margin: 5px 0 0;
-            color: #AAA;
-        }
-        
-        .bios-section {
-            margin-bottom: 30px;
-        }
-        
-        .section-title {
-            background-color: #001100;
-            padding: 5px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        table td, table th {
-            padding: 5px;
-            border: 1px solid #003300;
-        }
-        
-        table th {
-            background-color: #002200;
-            text-align: left;
-        }
-        
-        .bios-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #001100;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .key-command {
-            margin-right: 15px;
-        }
-        
-        .key {
-            background-color: #003300;
-            padding: 2px 6px;
-            border-radius: 3px;
-            margin-right: 5px;
-        }
-        
-        .bios-menu {
-            list-style-type: none;
-            padding: 0;
-        }
-        
-        .bios-menu li {
-            padding: 5px;
-            cursor: pointer;
-        }
-        
-        .bios-menu li.selected {
-            background-color: #00FF00;
-            color: #000;
-        }
-        .terminal-line {
-            position: relative;
-            animation: typing 2s steps(60, end);
-            white-space: nowrap;
-            overflow: hidden;
-            margin: 5px 0;
-        }
-        
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 20px;
-            background-color: #00FF00;
-            animation: blink 1s step-end infinite;
-            vertical-align: middle;
-            margin-left: 5px;
-        }
-        
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-        
-        .system-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        
-        .hardware-specs {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 5px;
-        }
-        
-        .hardware-specs div:nth-child(odd) {
-            font-weight: bold;
-        }
-        
-        .memory-bar {
-            height: 20px;
-            background-color: #003300;
-            margin-top: 5px;
-            position: relative;
-        }
-        
-        .memory-used {
-            height: 100%;
-            width: 65%;
-            background-color: #00FF00;
-        }
-        
-        .loading-dots::after {
-            content: ' ';
-            animation: dots 1.5s steps(5, end) infinite;
-        }
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card: rgba(255,255,255,0.06);
+      --accent: #7dd3fc;
+      --muted: rgba(255,255,255,0.6);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:linear-gradient(180deg,#071024 0%,#0f1724 100%); color:#fff; -webkit-font-smoothing:antialiased;
+      display:flex; align-items:center; justify-content:center; padding:32px;
+    }
+    .profile{
+      width:880px; max-width:96vw; background:var(--card); border-radius:14px; padding:20px; backdrop-filter: blur(8px) saturate(120%);
+      box-shadow: 0 8px 30px rgba(2,6,23,0.7); border:1px solid rgba(255,255,255,0.04);
+      display:grid; grid-template-columns: 220px 1fr; gap:20px; align-items:start;
+    }
+    .avatar{
+      width:180px; height:180px; border-radius:8px; overflow:hidden; background:linear-gradient(135deg,#0ea5e9,#7c3aed);
+      display:flex; align-items:center; justify-content:center; font-weight:700; font-size:36px; color:rgba(255,255,255,0.95);
+      box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+    }
+    .avatar img{width:100%; height:100%; object-fit:cover; display:block}
+    .left-meta{display:flex; flex-direction:column; gap:12px}
+    .name{font-size:22px; font-weight:700}
+    .meta-small{font-size:13px; color:var(--muted)}
+    .top-row{display:flex; justify-content:space-between; align-items:start}
+    .about{line-height:1.45; color:#e6eef9}
 
-        @keyframes dots {
-            0%, 20% { content: ' '; }
-            40% { content: '.'; }
-            60% { content: '..'; }
-            80%, 100% { content: '...'; }
-        }
-    </style>
+    .section{margin-top:12px}
+    .section h3{margin:0 0 8px 0; font-size:14px; letter-spacing:0.6px; color:var(--accent)}
+
+    .interests{display:flex; gap:8px; flex-wrap:wrap}
+    .chip{background:rgba(255,255,255,0.03); padding:6px 10px; border-radius:999px; font-size:13px}
+
+    .friends{display:grid; grid-template-columns:repeat(auto-fit,minmax(80px,1fr)); gap:10px}
+    .friend{background:rgba(255,255,255,0.03); padding:8px; border-radius:8px; text-align:center}
+    .friend img{width:100%; height:72px; object-fit:cover; border-radius:6px}
+    .friend-name{font-size:12px; margin-top:6px}
+    .actions{display:flex; gap:8px}
+    .btn{background:transparent; border:1px solid rgba(255,255,255,0.06); padding:8px 12px; border-radius:8px; font-size:13px; color:var(--muted); cursor:pointer}
+    .btn:hover{border-color:rgba(125,211,252,0.8); color:var(--accent)}
+
+    footer{grid-column:1/-1; margin-top:18px; font-size:12px; color:var(--muted); text-align:center}
+
+    @media (max-width:720px){
+      .profile{grid-template-columns:1fr;}
+      .avatar{width:140px;height:140px;margin:0 auto}
+      .left-meta{align-items:center;text-align:center}
+      footer{text-align:center}
+    }
+  </style>
 </head>
 <body>
-    <div class="bios-container">
-        <div class="bios-header">
-            <h1 class="bios-title">Cassidy's Portfolio v3.7.2</h1>
-        </div>
-        
-        <div class="bios-section">
-            <div class="section-title">SYSTEM INFORMATION</div>
-            <div class="system-info">
-                <div class="system-column">
-                    <div class="hardware-specs">
-                        <div>Developer:</div>
-                        <div>Cassidy Camp</div>
-                        <div>Version:</div>
-                        <div>Dev-3.7.2</div>
-                        <div>Languages:</div>
-                        <div>JavaScript, Python, HTML, CSS, JS</div>
-                        <div>Frameworks:</div>
-                        <div>React, Node.js, <strong>Flask</strong></div>
-                        <div>Build Date:</div>
-                        <div>03/06/2025</div>
-                        <div>UUID:</div>
-                        <div>ad61a563-89be-459b-958a-dd724a7dd065</div>
-                    </div>
-                </div>
-                <div class="system-column">
-                    <div>System Resources:</div>
-                    <div>Memory Usage: 65%</div>
-                    <div class="memory-bar">
-                        <div class="memory-used"></div>
-                    </div>
-                    <div>CPU Load: Normal</div>
-                    <div>Current Status: Ready</div>
-                    <div>Last Commit: 03/06/2025</div>
-                </div>
+  <main class="profile" role="main">
+    <aside style="display:flex;flex-direction:column;gap:12px">
+      <div class="avatar" id="avatar">
+        <img id="avatarImg" src="https://files.xspect.cc/files/Byte5_1751472087_3fa0e987-08bd-4afa-9395-ef8838b6d0d7.png?raw=1" alt="Profile picture">
+      </div>
+
+      <div class="left-meta">
+        <div class="name" id="displayName">Cassidy Camp</div>
+        <div class="meta-small" id="location">United States · Freelancer</div>
+      </div>
+    </aside>
+
+    <section>
+      <div class="top-row">
+        <div style="flex:1">
+          <h2 style="margin:0 0 8px 0; font-size:16px">About Me</h2>
+          <p class="about" id="aboutText">a caffeine-addled code gremlin who builds weird shit, breaks even more, and somehow makes it all work just enough to not explode (most of the time)</p>
+
+          <div class="section">
+            <h3>Interests</h3>
+            <div class="interests" id="interests">
+              <span class="chip">Music</span>
+              <span class="chip">Programming</span>
+              <span class="chip">Design</span>
             </div>
+          </div>
+
+          <div class="section">
+            <h3>Top Friends</h3>
+            <div class="friends" id="friends">
+              <div class="friend"><img src="https://avatars.githubusercontent.com/u/178066848?v=4" alt="Alriceee's Profile Picture"><div class="friend-name">Alriceee</div></div>
+            </div>
+          </div>
+
         </div>
-        
-        <div class="bios-section">
-            <div class="section-title">DEVELOPER SKILLS</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Skill Category</th>
-                        <th>Proficiency</th>
-                        <th>Last Used</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Front-End Development</td>
-                        <td>Level 3 (Intermediate)</td>
-                        <td>Current</td>
-                        <td>Active</td>
-                    </tr>
-                    <tr>
-                        <td>Back-End Development</td>
-                        <td>Level 4 (Advanced)</td>
-                        <td>Current</td>
-                        <td>Active</td>
-                    </tr>
-                    <tr>
-                        <td>Database Management</td>
-                        <td>Level 3 (Intermediate)</td>
-                        <td>Recently</td>
-                        <td>Active</td>
-                    </tr>
-                    <tr>
-                        <td>UI/UX Design</td>
-                        <td>Level 2 (Basic)</td>
-                        <td>Current</td>
-                        <td>Active</td>
-                    </tr>
-                </tbody>
-            </table>
+          <div style="margin-top:12px; background:rgba(255,255,255,0.02); padding:12px; border-radius:10px;">
+            <h3>Contact</h3>
+            <div class="meta-small"><a href="mailto:cassidy@cassidycamp.work">Email: cassidy@cassidycamp.work</a></div>
+            <div class="meta-small">Discord: @ByteSizedCoder</div>
+          </div>
         </div>
-        
-        <div class="bios-section">
-            <div class="section-title">PROJECT HISTORY</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Project Name</th>
-                        <th>Version</th>
-                        <th>Completion Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Xspect.cc</td>
-                        <td>v1.2.7</td>
-                        <td>03/06/2025</td>
-                        <td>In Development</td>
-                    </tr>
-                    <tr>
-                        <td>No-Ping</td>
-                        <td>v1.0.0</td>
-                        <td>???</td>
-                        <td>Production</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="bios-section">
-            <div class="section-title">CONTACT INTERFACES</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Interface</th>
-                        <th>Address</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Email</td>
-                        <td>cassidy@cassidycamp.work</td>
-                        <td>Online</td>
-                    </tr>
-                    <tr>
-                        <td>GitHub</td>
-                        <td>github.com/AnonymousElixir</td>
-                        <td>Online</td>
-                    </tr>
-                    <tr>
-                        <td>Twitter</td>
-                        <td>x.com/FlipMods</td>
-                        <td>Idle</td>
-                    </tr>
-                    <tr>
-                        <td>Personal Website</td>
-                        <td>cassidycamp.work</td>
-                        <td>Your here now!</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    
-    <div class="bios-footer">
-        <div>
-            <span class="key-command"><span class="key">↑↓</span> Navigate</span>
-            <span class="key-command"><span class="key">Enter</span> Select</span>
-            <span class="key-command"><span class="key">Esc</span> Back</span>
-        </div>
-        <div>Cassidy's BIOS © 2025</div>
-    </div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const lines = document.querySelectorAll('.terminal-line');
-            const lastLine = lines[lines.length - 1];
-            const menuItems = document.querySelectorAll('.bios-menu li');
-            let selectedIndex = 0;
-            
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'ArrowUp') {
-                    menuItems[selectedIndex].classList.remove('selected');
-                    selectedIndex = (selectedIndex > 0) ? selectedIndex - 1 : menuItems.length - 1;
-                    menuItems[selectedIndex].classList.add('selected');
-                } else if (e.key === 'ArrowDown') {
-                    menuItems[selectedIndex].classList.remove('selected');
-                    selectedIndex = (selectedIndex < menuItems.length - 1) ? selectedIndex + 1 : 0;
-                    menuItems[selectedIndex].classList.add('selected');
-                }
-            });
-        });
-    </script>
+      </div>
+      <iframe
+          src="https://live.weprogramstuff.cc/embed/video"
+          title="My livestream"
+          height="350px" width="550px"
+          referrerpolicy="origin"
+          allowfullscreen>
+        </iframe>
+
+      <footer>Made with <3 for FOSS</footer>
+    </section>
+  </main>
 </body>
 </html>
