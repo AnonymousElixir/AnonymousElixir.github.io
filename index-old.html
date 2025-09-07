@@ -3,127 +3,94 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cassidy Camp</title>
-  <meta name="description" content="Portfolio of Cassidy Camp showcasing expertise in html, css and js. View projects, experience, and contact information.">
-    <meta property="og:title" content="Cassidy Camp - My Portfolio">
-    <meta property="og:description" content="Explore my projects.">
-    <meta property="og:image" content="https://i.ibb.co/LzD4Cnyp/image.png">
-    <meta property="og:url" content="https://cassidycamp.work">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Cassidy Camp - My Portfolio">
-    <meta name="twitter:description" content="Explore my projects.">
-    <meta name="twitter:image" content="https://i.ibb.co/LzD4Cnyp/image.png">
-    <meta name="keywords" content="Cassidy Camp, portfolio">
-    <meta name="author" content="Cassidy Camp">
-    <link rel="canonical" href="https://cassidycamp.work">
+  <title>Cassidy's Myspace Hellhole</title>
   <style>
-    :root{
-      --bg:#0f1724;
-      --card: rgba(255,255,255,0.06);
-      --accent: #7dd3fc;
-      --muted: rgba(255,255,255,0.6);
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    body {
+      margin: 0;
+      background: url('https://i.ibb.co/WVk2kXk/stars.gif') repeat,
+                  linear-gradient(180deg,#071024 0%,#0f1724 100%);
+      color: #fff;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      padding: 32px;
+      overflow-x: hidden;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; background:linear-gradient(180deg,#071024 0%,#0f1724 100%); color:#fff; -webkit-font-smoothing:antialiased;
-      display:flex; align-items:center; justify-content:center; padding:32px;
+    .profile {
+      width: 880px; max-width: 96vw;
+      background: rgba(0,0,0,0.6);
+      border: 2px solid #7dd3fc;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 20px;
+      box-shadow: 0 0 25px #7dd3fc;
     }
-    .profile{
-      width:880px; max-width:96vw; background:var(--card); border-radius:14px; padding:20px; backdrop-filter: blur(8px) saturate(120%);
-      box-shadow: 0 8px 30px rgba(2,6,23,0.7); border:1px solid rgba(255,255,255,0.04);
-      display:grid; grid-template-columns: 220px 1fr; gap:20px; align-items:start;
+    .avatar {
+      width: 180px; height: 180px;
+      border: 3px solid #ff00ff;
+      box-shadow: 0 0 12px #ff00ff;
+      margin-bottom: 12px;
     }
-    .avatar{
-      width:180px; height:180px; border-radius:8px; overflow:hidden; background:linear-gradient(135deg,#0ea5e9,#7c3aed);
-      display:flex; align-items:center; justify-content:center; font-weight:700; font-size:36px; color:rgba(255,255,255,0.95);
-      box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+    .name {
+      font-size: 24px;
+      font-weight: bold;
+      color: #7dd3fc;
+      text-shadow: 2px 2px #ff00ff;
     }
-    .avatar img{width:100%; height:100%; object-fit:cover; display:block}
-    .left-meta{display:flex; flex-direction:column; gap:12px}
-    .name{font-size:22px; font-weight:700}
-    .meta-small{font-size:13px; color:var(--muted)}
-    .top-row{display:flex; justify-content:space-between; align-items:start}
-    .about{line-height:1.45; color:#e6eef9}
-
-    .section{margin-top:12px}
-    .section h3{margin:0 0 8px 0; font-size:14px; letter-spacing:0.6px; color:var(--accent)}
-
-    .interests{display:flex; gap:8px; flex-wrap:wrap}
-    .chip{background:rgba(255,255,255,0.03); padding:6px 10px; border-radius:999px; font-size:13px}
-
-    .friends{display:grid; grid-template-columns:repeat(auto-fit,minmax(80px,1fr)); gap:10px}
-    .friend{background:rgba(255,255,255,0.03); padding:8px; border-radius:8px; text-align:center}
-    .friend img{width:100%; height:72px; object-fit:cover; border-radius:6px}
-    .friend-name{font-size:12px; margin-top:6px}
-    .actions{display:flex; gap:8px}
-    .btn{background:transparent; border:1px solid rgba(255,255,255,0.06); padding:8px 12px; border-radius:8px; font-size:13px; color:var(--muted); cursor:pointer}
-    .btn:hover{border-color:rgba(125,211,252,0.8); color:var(--accent)}
-
-    footer{grid-column:1/-1; margin-top:18px; font-size:12px; color:var(--muted); text-align:center}
-
-    @media (max-width:720px){
-      .profile{grid-template-columns:1fr;}
-      .avatar{width:140px;height:140px;margin:0 auto}
-      .left-meta{align-items:center;text-align:center}
-      footer{text-align:center}
-    }
+    .mood { font-size: 14px; margin-top: 6px; color: #ffb6c1; }
+    .friends { display: flex; gap: 8px; flex-wrap: wrap; }
+    .friend { width: 80px; text-align: center; border: 2px dashed #ff00ff; padding: 4px; }
+    marquee { font-size: 14px; color: #00ffea; margin: 10px 0; }
+    .visitor-counter { margin-top: 14px; text-align: center; }
+    .section h3 { color: #7fff00; margin-bottom: 6px; }
+    footer { margin-top: 16px; font-size: 12px; color: #aaa; text-align: center; }
   </style>
 </head>
 <body>
-  <main class="profile" role="main">
-    <aside style="display:flex;flex-direction:column;gap:12px">
-      <div class="avatar" id="avatar">
-        <img id="avatarImg" src="https://avatars.githubusercontent.com/u/179895365?v=4" alt="Profile picture">
-      </div>
+  <marquee behavior="alternate" scrollamount="8">★ Welcome to Cassidy's Digital Dumpster ★</marquee>
 
-      <div class="left-meta">
-        <div class="name" id="displayName">Cassidy Camp</div>
-        <div class="meta-small" id="location">United States · Freelancer</div>
+  <main class="profile">
+    <aside>
+      <div class="avatar">
+        <img src="https://avatars.githubusercontent.com/u/179895365?v=4" width="180" height="180">
+      </div>
+      <div class="name">Cassidy Camp</div>
+      <div class="meta">Location: United States</div>
+      <div class="meta">Status: <b style="color:lime">Online Now</b></div>
+      <div class="visitor-counter">
+        <h3>Visitors</h3>
+        <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=f0756f69cd8a359c1f461e21321d4dc3bcf4de75'></script>
+        <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1386953/t/2"></script>
       </div>
     </aside>
 
     <section>
-      <div class="top-row">
-        <div style="flex:1">
-          <h2 style="margin:0 0 8px 0; font-size:16px">About Me</h2>
-          <p class="about" id="aboutText">a caffeine-addled code gremlin who builds weird shit, breaks even more, and somehow makes it all work just enough to not explode (most of the time)</p>
+      <h2>About Me</h2>
+      <p>a caffeine-addled code gremlin who builds weird stuff, breaks more, and duct-tapes it together with spite and caffeine.</p>
 
-          <div class="section">
-            <h3>Interests</h3>
-            <div class="interests" id="interests">
-              <span class="chip">Music</span>
-              <span class="chip">Programming</span>
-              <span class="chip">Design</span>
-            </div>
-          </div>
-
-          <div class="section">
-            <h3>Top Friends</h3>
-            <div class="friends" id="friends">
-              <div class="friend"><img src="https://avatars.githubusercontent.com/u/178066848?v=4" alt="Alriceee's Profile Picture"><div class="friend-name">Alriceee</div></div>
-            </div>
-          </div>
-
-        </div>
-          <div style="margin-top:12px; background:rgba(255,255,255,0.02); padding:12px; border-radius:10px;">
-            <h3>Contact</h3>
-            <div class="meta-small"><a href="mailto:cassidy@cassidycamp.work">Email: cassidy@cassidycamp.work</a></div>
-            <div class="meta-small">Discord: @ByteSizedCoder</div>
+      <div class="section">
+        <h3>Top Friends</h3>
+        <div class="friends">
+          <div class="friend">
+            <img src="https://avatars.githubusercontent.com/u/178066848?v=4" width="72" height="72">
+            <div>Alriceee</div>
           </div>
         </div>
       </div>
-      <iframe
-          src="https://live.weprogramstuff.cc/embed/video"
-          title="My livestream"
-          height="350px" width="550px"
-          referrerpolicy="origin"
-          allowfullscreen>
-        </iframe>
+      
+      <div class="section">
+        <h3>Now Playing</h3>
+        <audio controls autoplay loop>
+          <source src="https://www.myinstants.com/media/sounds/trololo.mp3" type="audio/mpeg">
+        </audio>
+      </div>
 
-      <footer>Made with <3 for FOSS</footer>
+      <iframe src="https://live.weprogramstuff.cc/embed/video"
+              title="My livestream"
+              width="550"
+              height="350"
+              allowfullscreen></iframe>
+
+      <footer>© 2007–2025 Cassidy's Myspace Hellscape • Powered by Caffeine & Regret</footer>
     </section>
   </main>
 </body>
